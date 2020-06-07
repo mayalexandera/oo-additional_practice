@@ -7,6 +7,7 @@ class Guest
     @name = name
     @@all << self
   end
+  
   def listings
     Listing.all.select{|listing| listing.guest == self}
   end
@@ -16,7 +17,7 @@ class Guest
   end
 
   def trip_count
-    self.trips.length
+    trips.length
   end
 
   def self.all
@@ -24,7 +25,7 @@ class Guest
   end
 
   def self.pro_traveller
-    @@all.select{|guest| guest.trips.length > 1}
+    @@all.select{|guest| guest.trips.trip_count > 1}
   end
 
   def self.find_all_by_name(name)

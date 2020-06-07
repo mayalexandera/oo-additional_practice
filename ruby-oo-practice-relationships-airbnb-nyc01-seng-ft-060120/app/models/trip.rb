@@ -9,14 +9,6 @@ class Trip
     @@all << self
   end
 
-  def listing
-    @listing
-  end
-
-  def guest
-    @guest
-  end
-
   def self.all
     @@all
   end

@@ -1,6 +1,6 @@
 class Character
   @@all = []
-  attr_reader :character_name, :media, :actor
+  attr_reader :character_name, :actor
 
   def initialize(character_name, actor)
     @character_name = character_name
