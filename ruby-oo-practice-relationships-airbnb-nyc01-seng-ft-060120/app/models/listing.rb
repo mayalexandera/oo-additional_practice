@@ -9,15 +9,15 @@ class Listing
   end
 
   def guests
-    Trip.all.select {|trip| trip.guest if trip.listing == self}
+    Trip.all.select{|t| t.listing == self}.map{|t| t.guest}
   end
 
   def trips
-    Trip.all.select{|trip| trip.listing == self}
+    Trip.all.select{|t| t.listing == self}
   end
 
-  def trips_count
-    self.trips.length
+  def trip_count
+    trips.length
   end
 
   def self.all
@@ -25,11 +25,11 @@ class Listing
   end
 
   def self.find_all_by_city(city)
-    @@all.select { |listing| listing.city == city}
+    Listing.all.select { |listing| listing.city == city}
   end
 
   def self.most_popular
-    listing = @@all.max_by{|e| e.trips.length}
-    "Most Popular Listing: #{listing} | city: #{listing.city} | # of trips: #{listing.trips.length}"
+    listing = Listing.all.max_by{|e| e.trip_count}
+    "Most Popular Listing: #{listing} | city: #{listing.city} | # of trips: #{listing.trip_count}"
   end
 end

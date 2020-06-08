@@ -25,11 +25,11 @@ class Guest
   end
 
   def self.pro_traveller
-    @@all.select{|guest| guest.trips.trip_count > 1}
+    Guest.all.select{|guest| guest.trip_count > 1}
   end
 
   def self.find_all_by_name(name)
-    @@all.select{|guest| guest.name == name}
+    Guest.all.select{|guest| guest.name == name}
   end
 
 end
