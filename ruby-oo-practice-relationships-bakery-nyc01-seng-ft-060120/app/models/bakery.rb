@@ -7,9 +7,9 @@ class Bakery
   end
   
   def ingredients
-    ingredients = []
-    Dessert.all.select { |dessert| ingredients << dessert.ingredients if dessert.bakery == self}
-    ingredients.flatten.uniq{|e| e.name}
+    Dessert.all.select{ |dessert| dessert.bakery == self}.map do |dessert|
+      dessert.ingredients.flatten.uniq{|i| i.name}
+    end
   end
 
   def desserts
@@ -17,9 +17,7 @@ class Bakery
   end
 
   def average_calories
-    calories = []
-    desserts.select {|dessert| calories << dessert.calories}
-    calories.sum/calories.length
+    desserts.map{ |dessert| dessert.calories }.sum / desserts.length
   end
 
   def self.all
@@ -27,14 +25,8 @@ class Bakery
   end
 
   def shopping_list
-    ingredients = []
-    desserts.each do |dessert| 
-      dessert.ingredients.each do |ingredient|
-        ingredients << ingredient.name if !ingredients.include?(ingredient.name)
-      end
-    end
-
-    ingredients.join(" ")
+    desserts.map{ |dessert| dessert.ingredients}
+    .flatten.uniq.map{|i| i.name}.join(", ")
   end
 end
 

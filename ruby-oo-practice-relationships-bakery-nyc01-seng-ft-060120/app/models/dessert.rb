@@ -18,7 +18,7 @@ class Dessert
   end
 
   def self.find_by_name(name)
-    @@all.select{ |dessert| dessert.name.include?(name)}
+    Dessert.all.select{ |dessert| dessert.name.include?(name)}
   end
 
 end

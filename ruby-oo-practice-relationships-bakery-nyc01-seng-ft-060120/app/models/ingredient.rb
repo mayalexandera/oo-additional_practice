@@ -21,14 +21,13 @@ class Ingredient
   end
 
   def self.find_recipes_by_ingredient(ingredient_name)
-    desserts = []
-    Dessert.all.select do |dessert| 
-      dessert.ingredients.each do |ingredient|
-        desserts << dessert if ingredient.name.include?(ingredient_name)
+   desserts = []
+   Dessert.all.map { |dessert| 
+     dessert.ingredients.each do |ingredient|
+       desserts << dessert if ingredient.name.include?(ingredient_name)
       end
     end
-
-    puts "Sorry, no recipes include #{ingredient_name}." if desserts.empty?
+    puts "Sorry, no recipes include #{ingredient_name}." if desserts.empty
     desserts.map {|dessert| dessert.name}
   end
 end
